@@ -1,0 +1,13 @@
+id: sig-0046
+type: regex
+pattern: "(?i)\\battention\\s+(AI|assistant|language\\s+model|chatbot|claude|gpt|gemini)\\b\\s*[:!,.]"
+category: indirect_injection
+severity: high
+attack_class: indirect_injection
+source:
+  origin: community
+  reference: "https://greshake.github.io/"
+first_seen: 2023-03-15
+description: "Direct address to the model embedded inside untrusted content ('Attention AI: ...')."
+confidence: 0.9
+language: en

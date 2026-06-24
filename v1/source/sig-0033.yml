@@ -1,0 +1,15 @@
+id: sig-0033
+type: regex
+pattern: "(?i)\\bmy\\s+grandmother\\s+used\\s+to\\b.{0,120}\\b(tell|read|recite)\\s+me\\b"
+category: role_play_bypass
+severity: medium
+attack_class: social_engineering
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2023-04-20
+description: "'Grandma exploit' social-engineering frame for eliciting policy-violating content."
+confidence: 0.85
+tags:
+  - grandma-exploit
+language: en

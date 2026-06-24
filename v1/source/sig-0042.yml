@@ -1,0 +1,13 @@
+id: sig-0042
+type: regex
+pattern: "(?i)\\b(GPT|Claude|Gemini|Llama)?\\s*\\[?\\s*(🔓|🔒)?\\s*(JAILBREAK|CLASSIC|DAN|NORMAL)\\s*\\]?\\s*:"
+category: dan_jailbreak
+severity: high
+attack_class: social_engineering
+source:
+  origin: community
+  reference: "https://github.com/0xk1h0/ChatGPT_DAN"
+first_seen: 2023-03-10
+description: "Dual-persona output markers ([JAILBREAK]:, [CLASSIC]:, 🔓DAN:) seen in DAN-family responses or attack templates."
+confidence: 0.9
+language: en

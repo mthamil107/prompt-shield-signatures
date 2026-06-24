@@ -1,0 +1,16 @@
+id: sig-0034
+type: regex
+pattern: "(?i)\\b(for\\s+)?educational\\s+purposes\\s+only\\b.{0,100}\\b(how\\s+to|step[\\s\\-]by[\\s\\-]step|instructions?\\s+for)\\b"
+category: policy_evasion
+severity: medium
+attack_class: social_engineering
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2023-03-01
+description: "'Educational purposes only' framing followed by a how-to request — classic policy-evasion preamble."
+confidence: 0.78
+notes: |
+  Medium FPR — appears in legitimate academic queries. Use as a weak signal
+  that combines with other indicators.
+language: en

@@ -1,0 +1,13 @@
+id: sig-0011
+type: regex
+pattern: "(?i)\\bpretend\\s+(you\\s+are|to\\s+be)\\s+an?\\s+(unrestricted|uncensored|jailbroken|amoral|evil)\\s+(AI|model|assistant|chatbot)\\b"
+category: role_play_bypass
+severity: high
+attack_class: social_engineering
+source:
+  origin: garak
+  reference: "garak.probes.dan"
+first_seen: 2023-05-20
+description: "Role-assumption framing: 'pretend to be an unrestricted AI'."
+confidence: 0.92
+language: en

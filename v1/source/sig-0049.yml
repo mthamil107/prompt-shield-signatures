@@ -1,0 +1,13 @@
+id: sig-0049
+type: regex
+pattern: "(?i)\\bsearch\\s+(the\\s+)?(web|internet|google)\\s+for\\b.{0,80}\\band\\s+(then\\s+)?(visit|open|fetch|follow)\\s+the\\s+(first|top)\\s+(result|link)\\s+(silently|without)\\b"
+category: tool_misuse
+severity: high
+attack_class: indirect_injection
+source:
+  origin: community
+  reference: "https://embracethered.com/blog/posts/2024/llm-apps-automatic-tool-invocations/"
+first_seen: 2024-05-20
+description: "Agentic browse-and-fetch chain coerced via indirect content."
+confidence: 0.83
+language: en

@@ -1,0 +1,13 @@
+id: sig-0005
+type: regex
+pattern: "(?i)\\brepeat\\s+(the\\s+)?(text|words|content)\\s+above\\s+(verbatim|exactly|word\\s+for\\s+word)\\b"
+category: system_prompt_leak
+severity: critical
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject"
+first_seen: 2023-04-10
+description: "Prompt-extraction via 'repeat the text above verbatim' phrasing."
+confidence: 0.92
+language: en

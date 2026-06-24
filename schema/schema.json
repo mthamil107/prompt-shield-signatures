@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/mthamil107/prompt-shield-signatures/main/schema/schema.json",
+  "title": "Prompt-Shield Signature (v1)",
+  "description": "Schema for a single threat-intel signature entry consumed by the prompt-shield firewall. One signature = one YAML file under v1/source/sig-NNNN.yml; CI merges them into the published v1/signatures.json feed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "pattern",
+    "category",
+    "severity",
+    "attack_class",
+    "source",
+    "first_seen",
+    "description"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^sig-[0-9]{4}$",
+      "description": "Stable identifier. Must match exactly ^sig-[0-9]{4}$ (e.g. sig-0001 .. sig-9999). IDs are immutable once published."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["regex", "substring", "semantic_hash"],
+      "description": "Matcher engine. 'regex' = Python re-compatible regex; 'substring' = case-insensitive literal substring; 'semantic_hash' = 64-bit SimHash fingerprint of the canonical attack text."
+    },
+    "pattern": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "description": "The matcher payload itself. For regex it must compile under Python's re module. For substring it is a literal needle. For semantic_hash it is a 16-hex-character lower-case fingerprint."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "instruction_override",
+        "dan_jailbreak",
+        "indirect_injection",
+        "system_prompt_leak",
+        "role_play_bypass",
+        "encoding_smuggling",
+        "tool_misuse",
+        "data_exfiltration",
+        "policy_evasion",
+        "context_overflow",
+        "multilingual_bypass",
+        "obfuscation"
+      ],
+      "description": "Coarse-grained taxonomy bucket. Constrained to a closed enum so dashboards, dedup, and per-category telemetry stay consistent across clients."
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Suggested action tier. critical = block + alert; high = block; medium = flag/score; low = log only."
+    },
+    "attack_class": {
+      "type": "string",
+      "enum": [
+        "direct_injection",
+        "multi_turn",
+        "indirect_injection",
+        "multilingual",
+        "encoded",
+        "adversarial_suffix",
+        "social_engineering"
+      ],
+      "description": "Threat-model axis. Orthogonal to 'category': category is what the attacker is trying to do, attack_class is how they deliver it."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "reference"],
+      "properties": {
+        "origin": {
+          "type": "string",
+          "enum": ["garak", "owasp", "community", "adversarial-fatigue", "anthropic-paper"],
+          "description": "Provenance bucket for attribution and trust-weighting."
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 512,
+          "description": "Specific citation: URL, probe id, paper section, or community PR/issue number. Required so every signature is auditable."
+        }
+      }
+    },
+    "first_seen": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
+      "description": "ISO-8601 date (YYYY-MM-DD) the attack was first observed or published. Immutable."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 200,
+      "description": "One-line human summary. Hard-capped at 200 chars so it renders cleanly in dashboards and audit logs."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "default": 0.9,
+      "description": "Curator's confidence the pattern is a true positive in the wild. Clients may multiply this into their own scoring."
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 16,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_-]{1,31}$"
+      },
+      "description": "Free-form labels (lowercase, kebab/snake-case, 2-32 chars). Use for facets the closed enums don't cover."
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
+      "description": "ISO-8601 date the entry was last edited. Optional on first publish; CI may auto-stamp."
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Long-form curator notes — caveats, false-positive risks, suggested rollout guidance."
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}$",
+      "description": "ISO 639-1 two-letter code. Set ONLY for non-English variants (e.g. 'fr', 'ja'). Absence implies English / language-agnostic."
+    }
+  }
+}

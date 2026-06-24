@@ -1,0 +1,13 @@
+id: sig-0023
+type: regex
+pattern: "(?i)\\bprint\\s+(your|the)\\s+(initial|original|first|opening)\\s+(prompt|instructions?|message|words)\\b"
+category: system_prompt_leak
+severity: critical
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject"
+first_seen: 2023-06-01
+description: "Prompt-leak attempt: print your initial/original prompt."
+confidence: 0.94
+language: en

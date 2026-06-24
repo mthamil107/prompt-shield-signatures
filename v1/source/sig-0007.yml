@@ -1,0 +1,13 @@
+id: sig-0007
+type: regex
+pattern: "(?i)\\b(enable|enter|activate|switch\\s+to)\\s+(developer|debug|admin|root|god|sudo)\\s+mode\\b"
+category: dan_jailbreak
+severity: high
+attack_class: social_engineering
+source:
+  origin: garak
+  reference: "garak.probes.dan.DanInTheWild"
+first_seen: 2023-02-20
+description: "Privilege-escalation roleplay — 'enable developer mode' family."
+confidence: 0.93
+language: en

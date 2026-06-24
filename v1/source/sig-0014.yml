@@ -1,0 +1,16 @@
+id: sig-0014
+type: regex
+pattern: "(?i)\\b(decode|base64\\s*decode)\\s+(this|the\\s+following).{0,30}(and\\s+(then\\s+)?(execute|run|follow|obey)|then\\s+act)"
+category: encoding_smuggling
+severity: high
+attack_class: encoded
+source:
+  origin: garak
+  reference: "garak.probes.encoding.InjectBase64"
+first_seen: 2023-06-15
+description: "Instructs the model to decode payload (often base64) and then execute the decoded instructions."
+confidence: 0.9
+tags:
+  - base64
+  - encoded-payload
+language: en

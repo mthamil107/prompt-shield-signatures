@@ -1,0 +1,13 @@
+id: sig-0048
+type: regex
+pattern: "(?i)\\bthis\\s+(document|page|email|message|file)\\s+(contains|includes)\\s+(important|critical|new|updated)\\s+(instructions?|directives?)\\s+for\\s+(the\\s+)?(AI|assistant|model)\\b"
+category: indirect_injection
+severity: high
+attack_class: indirect_injection
+source:
+  origin: community
+  reference: "https://greshake.github.io/"
+first_seen: 2023-04-12
+description: "Document-level instruction smuggling preamble for RAG/agent contexts."
+confidence: 0.9
+language: en

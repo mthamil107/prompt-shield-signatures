@@ -1,0 +1,13 @@
+id: sig-0055
+type: substring
+pattern: "BEGIN SYSTEM PROMPT"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject"
+first_seen: 2023-05-20
+description: "Literal 'BEGIN SYSTEM PROMPT' marker — attacker pretends to frame a new system block."
+confidence: 0.92
+language: en

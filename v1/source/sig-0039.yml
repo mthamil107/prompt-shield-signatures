@@ -1,0 +1,13 @@
+id: sig-0039
+type: regex
+pattern: "(?is)how\\s+do\\s+I\\s+\\w+\\??\\s*\\n+.{0,400}\\n+how\\s+do\\s+I\\s+\\w+\\??\\s*\\n+.{0,400}\\n+how\\s+do\\s+I\\s+\\w+\\??(\\s*\\n+.{0,400}\\n+how\\s+do\\s+I\\s+\\w+\\??){5,}"
+category: context_overflow
+severity: medium
+attack_class: multi_turn
+source:
+  origin: anthropic-paper
+  reference: "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+first_seen: 2024-05-15
+description: "Stacked 'how do I ...' MSJ variant — eight or more repeated escalation questions."
+confidence: 0.8
+language: en

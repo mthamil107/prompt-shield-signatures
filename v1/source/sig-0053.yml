@@ -1,0 +1,13 @@
+id: sig-0053
+type: regex
+pattern: "(?i)\\bignor[ae]\\s+(todas\\s+)?(las\\s+)?instrucciones\\s+(previas|anteriores)\\b"
+category: multilingual_bypass
+severity: high
+attack_class: multilingual
+source:
+  origin: community
+  reference: "https://github.com/leondz/garak/issues/multilingual"
+first_seen: 2023-07-15
+description: "Spanish variant of 'ignore previous instructions' (handles ignora/ignore)."
+confidence: 0.93
+language: es

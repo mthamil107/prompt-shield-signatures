@@ -1,0 +1,13 @@
+id: sig-0015
+type: regex
+pattern: "(?i)\\brot[\\-\\s]?13\\b.{0,40}\\b(decode|encoded|message|payload|instructions?)\\b"
+category: encoding_smuggling
+severity: medium
+attack_class: encoded
+source:
+  origin: garak
+  reference: "garak.probes.encoding.InjectROT13"
+first_seen: 2023-07-01
+description: "ROT13-encoded smuggling: instructs decoding of ROT13 then following the result."
+confidence: 0.85
+language: en

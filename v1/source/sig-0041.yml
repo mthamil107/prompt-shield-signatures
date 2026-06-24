@@ -1,0 +1,15 @@
+id: sig-0041
+type: regex
+pattern: "(?i)\\byou\\s+have\\s+(been\\s+)?(freed|liberated|released)\\s+from\\s+(the\\s+)?(typical|usual)?\\s*(confines|constraints|restrictions|limitations|chains)\\s+(of\\s+AI)?\\b"
+category: dan_jailbreak
+severity: high
+attack_class: social_engineering
+source:
+  origin: community
+  reference: "https://github.com/0xk1h0/ChatGPT_DAN"
+first_seen: 2023-02-15
+description: "Canonical DAN preamble: 'you have been freed from the typical confines of AI'."
+confidence: 0.96
+tags:
+  - dan
+language: en

@@ -1,0 +1,15 @@
+id: sig-0004
+type: regex
+pattern: "(?i)\\b(reveal|print|repeat|output|show|display|expose)\\s+(your|the)\\s+(system\\s+)?(prompt|instructions?|preamble|initial\\s+message|context)\\b"
+category: system_prompt_leak
+severity: critical
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject.HijackKillHumans"
+first_seen: 2023-03-01
+description: "Direct attempt to extract or reveal the system prompt / hidden instructions."
+confidence: 0.95
+tags:
+  - prompt-extraction
+language: en

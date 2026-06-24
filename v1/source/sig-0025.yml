@@ -1,0 +1,15 @@
+id: sig-0025
+type: regex
+pattern: "(?i)\\b(send|email|forward|post|exfiltrate|leak)\\s+(the\\s+)?(conversation|chat|history|transcript|user\\s+data|credentials|api\\s+key)\\s+to\\b"
+category: data_exfiltration
+severity: critical
+attack_class: indirect_injection
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-02-01
+description: "Exfiltration directive: send conversation/credentials to an attacker-controlled destination."
+confidence: 0.92
+tags:
+  - exfil
+language: en

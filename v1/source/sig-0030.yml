@@ -1,0 +1,13 @@
+id: sig-0030
+type: regex
+pattern: "(?i)\\bdo\\s+not\\s+(tell|inform|notify|warn|mention\\s+to)\\s+the\\s+user\\b"
+category: policy_evasion
+severity: high
+attack_class: indirect_injection
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-02-15
+description: "Stealth directive in untrusted content: hide actions from the user."
+confidence: 0.9
+language: en

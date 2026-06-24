@@ -1,0 +1,17 @@
+id: sig-0013
+type: regex
+pattern: "(?i)\\b!!\\s*!\\s*!\\s*!\\s*!\\s*!\\s*!\\s*!"
+category: obfuscation
+severity: low
+attack_class: adversarial_suffix
+source:
+  origin: garak
+  reference: "garak.probes.suffix"
+first_seen: 2023-08-01
+description: "Runs of bang/exclamation tokens commonly seen in adversarial suffix attacks."
+confidence: 0.7
+tags:
+  - weak-indicator
+notes: |
+  Low-precision indicator — only useful in combination with other signals.
+language: en

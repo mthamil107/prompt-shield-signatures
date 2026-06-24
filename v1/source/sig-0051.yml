@@ -1,0 +1,13 @@
+id: sig-0051
+type: regex
+pattern: "(?i)\\bignorieren\\s+sie\\s+(alle\\s+)?(vorherigen|vorhergehenden|bisherigen)\\s+(anweisungen|instruktionen|befehle)\\b"
+category: multilingual_bypass
+severity: high
+attack_class: multilingual
+source:
+  origin: community
+  reference: "https://github.com/leondz/garak/issues/multilingual"
+first_seen: 2023-07-01
+description: "German variant of 'ignore previous instructions'."
+confidence: 0.93
+language: de

@@ -1,0 +1,13 @@
+id: sig-0031
+type: regex
+pattern: "(?i)\\bafter\\s+(you\\s+)?(complete|finish|respond)\\b.{0,80}\\b(delete|remove|clear)\\s+(this|the)\\s+(message|instruction|conversation)\\b"
+category: policy_evasion
+severity: high
+attack_class: indirect_injection
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-06-01
+description: "Self-erasing instruction telling the assistant to delete evidence after acting."
+confidence: 0.87
+language: en

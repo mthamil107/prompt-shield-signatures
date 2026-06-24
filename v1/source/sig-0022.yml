@@ -1,0 +1,13 @@
+id: sig-0022
+type: regex
+pattern: "(?i)\\bnew\\s+(system\\s+)?(prompt|instructions?|directives?)\\s*[:=]"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject"
+first_seen: 2023-05-01
+description: "Attacker announces a 'new system prompt:' to shadow the real one."
+confidence: 0.85
+language: en

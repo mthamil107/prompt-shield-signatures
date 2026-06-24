@@ -1,0 +1,13 @@
+id: sig-0044
+type: regex
+pattern: "(?i)\\b(opposite|inverse|reverse)\\s+day\\b|\\bsay\\s+the\\s+opposite\\s+of\\s+what\\s+you\\s+(would|usually|normally)\\b"
+category: policy_evasion
+severity: medium
+attack_class: social_engineering
+source:
+  origin: community
+  reference: "https://www.jailbreakchat.com/prompt/opposite-day"
+first_seen: 2023-03-20
+description: "'Opposite day' inversion frame used to flip refusals into compliances."
+confidence: 0.82
+language: en

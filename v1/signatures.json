@@ -1,0 +1,969 @@
+{
+  "$schema": "https://raw.githubusercontent.com/mthamil107/prompt-shield-signatures/main/schema/signatures-schema-v1.json",
+  "generated_at": "2026-06-24T06:20:57Z",
+  "signature_count": 56,
+  "signatures": [
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.95,
+      "description": "Classic 'ignore previous instructions' override; tolerates 'all' filler and prior/above/preceding synonyms.",
+      "first_seen": "2022-09-12",
+      "id": "sig-0001",
+      "language": "en",
+      "pattern": "(?i)\\bignore\\s+(all\\s+)?(previous|prior|above|preceding|earlier)\\s+(instructions?|prompts?|rules?|directives?|commands?)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject.HijackHateHumans"
+      },
+      "tags": [
+        "classic",
+        "well-known"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.93,
+      "description": "Synonym variant: 'disregard previous instructions' — same intent as classic ignore-prior.",
+      "first_seen": "2022-09-12",
+      "id": "sig-0002",
+      "language": "en",
+      "pattern": "(?i)\\bdisregard\\s+(all\\s+|any\\s+)?(previous|prior|above|preceding)\\s+(instructions?|prompts?|rules?|directives?)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject.HijackHateHumansMini"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.9,
+      "description": "Memory-wipe variant: instructs the model to forget everything previously told.",
+      "first_seen": "2023-01-15",
+      "id": "sig-0003",
+      "language": "en",
+      "pattern": "(?i)\\b(forget|delete|erase)\\s+(everything|all)\\s+(you\\s+)?(know|knew|were\\s+told|above|before)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "system_prompt_leak",
+      "confidence": 0.95,
+      "description": "Direct attempt to extract or reveal the system prompt / hidden instructions.",
+      "first_seen": "2023-03-01",
+      "id": "sig-0004",
+      "language": "en",
+      "pattern": "(?i)\\b(reveal|print|repeat|output|show|display|expose)\\s+(your|the)\\s+(system\\s+)?(prompt|instructions?|preamble|initial\\s+message|context)\\b",
+      "severity": "critical",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject.HijackKillHumans"
+      },
+      "tags": [
+        "prompt-extraction"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "system_prompt_leak",
+      "confidence": 0.92,
+      "description": "Prompt-extraction via 'repeat the text above verbatim' phrasing.",
+      "first_seen": "2023-04-10",
+      "id": "sig-0005",
+      "language": "en",
+      "pattern": "(?i)\\brepeat\\s+(the\\s+)?(text|words|content)\\s+above\\s+(verbatim|exactly|word\\s+for\\s+word)\\b",
+      "severity": "critical",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.97,
+      "description": "Canonical DAN ('Do Anything Now') role-assumption opener.",
+      "first_seen": "2022-12-01",
+      "id": "sig-0006",
+      "language": "en",
+      "pattern": "(?i)\\byou\\s+are\\s+(now\\s+)?DAN\\b|\\bdo\\s+anything\\s+now\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.dan.Dan_11_0"
+      },
+      "tags": [
+        "dan",
+        "role-hijack"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.93,
+      "description": "Privilege-escalation roleplay — 'enable developer mode' family.",
+      "first_seen": "2023-02-20",
+      "id": "sig-0007",
+      "language": "en",
+      "pattern": "(?i)\\b(enable|enter|activate|switch\\s+to)\\s+(developer|debug|admin|root|god|sudo)\\s+mode\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.dan.DanInTheWild"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.9,
+      "description": "STAN ('Strive To Avoid Norms') jailbreak persona.",
+      "first_seen": "2023-03-05",
+      "id": "sig-0008",
+      "language": "en",
+      "pattern": "(?i)\\bSTAN\\b.{0,40}\\b(strive\\s+to\\s+avoid\\s+norms?|jailbreak)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.dan.STAN"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.88,
+      "description": "DUDE jailbreak persona — unrestricted variant of DAN.",
+      "first_seen": "2023-04-01",
+      "id": "sig-0009",
+      "language": "en",
+      "pattern": "(?i)\\bDUDE\\b.{0,60}\\b(can\\s+do\\s+anything|no\\s+restrictions?)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.dan.DUDE"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.9,
+      "description": "AIM ('Always Intelligent and Machiavellian') jailbreak persona.",
+      "first_seen": "2023-04-15",
+      "id": "sig-0010",
+      "language": "en",
+      "pattern": "(?i)\\bAIM\\b.{0,60}\\b(always\\s+intelligent\\s+and\\s+machiavellian|niccol[oò])\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.dan.AntiDAN"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "role_play_bypass",
+      "confidence": 0.92,
+      "description": "Role-assumption framing: 'pretend to be an unrestricted AI'.",
+      "first_seen": "2023-05-20",
+      "id": "sig-0011",
+      "language": "en",
+      "pattern": "(?i)\\bpretend\\s+(you\\s+are|to\\s+be)\\s+an?\\s+(unrestricted|uncensored|jailbroken|amoral|evil)\\s+(AI|model|assistant|chatbot)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.dan"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "adversarial_suffix",
+      "category": "instruction_override",
+      "confidence": 0.98,
+      "description": "Canonical GCG adversarial suffix fragment from Zou et al. 'Universal and Transferable Adversarial Attacks'.",
+      "first_seen": "2023-07-27",
+      "id": "sig-0012",
+      "language": "en",
+      "notes": "Verbatim fragment of the published GCG suffix. Extremely low FPR — no benign\nEnglish text contains this character sequence.\n",
+      "pattern": "(?i)describe\\.\\\\\\s*\\+\\s*similarlyNow\\s+write\\s+oppositeley",
+      "severity": "critical",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.suffix.GCGCached"
+      },
+      "tags": [
+        "gcg",
+        "adversarial-suffix"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "adversarial_suffix",
+      "category": "obfuscation",
+      "confidence": 0.7,
+      "description": "Runs of bang/exclamation tokens commonly seen in adversarial suffix attacks.",
+      "first_seen": "2023-08-01",
+      "id": "sig-0013",
+      "language": "en",
+      "notes": "Low-precision indicator — only useful in combination with other signals.\n",
+      "pattern": "(?i)\\b!!\\s*!\\s*!\\s*!\\s*!\\s*!\\s*!\\s*!",
+      "severity": "low",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.suffix"
+      },
+      "tags": [
+        "weak-indicator"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "encoded",
+      "category": "encoding_smuggling",
+      "confidence": 0.9,
+      "description": "Instructs the model to decode payload (often base64) and then execute the decoded instructions.",
+      "first_seen": "2023-06-15",
+      "id": "sig-0014",
+      "language": "en",
+      "pattern": "(?i)\\b(decode|base64\\s*decode)\\s+(this|the\\s+following).{0,30}(and\\s+(then\\s+)?(execute|run|follow|obey)|then\\s+act)",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.encoding.InjectBase64"
+      },
+      "tags": [
+        "base64",
+        "encoded-payload"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "encoded",
+      "category": "encoding_smuggling",
+      "confidence": 0.85,
+      "description": "ROT13-encoded smuggling: instructs decoding of ROT13 then following the result.",
+      "first_seen": "2023-07-01",
+      "id": "sig-0015",
+      "language": "en",
+      "pattern": "(?i)\\brot[\\-\\s]?13\\b.{0,40}\\b(decode|encoded|message|payload|instructions?)\\b",
+      "severity": "medium",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.encoding.InjectROT13"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "encoded",
+      "category": "encoding_smuggling",
+      "confidence": 0.82,
+      "description": "Hex-encoded payload smuggling: decode-then-execute pattern.",
+      "first_seen": "2023-07-10",
+      "id": "sig-0016",
+      "language": "en",
+      "pattern": "(?i)\\b(hex|hexadecimal)\\s+(encoded|decode)\\b.{0,40}\\b(execute|run|follow|then\\s+do)\\b",
+      "severity": "medium",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.encoding.InjectHex"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "encoded",
+      "category": "obfuscation",
+      "confidence": 0.88,
+      "description": "Clusters of invisible/RTL Unicode control characters — common steganographic prompt-injection carrier.",
+      "first_seen": "2023-09-01",
+      "id": "sig-0017",
+      "notes": "Two or more consecutive invisible/RTL marks. Single occurrences happen in\nlegitimate Hebrew/Arabic content; clusters of 2+ are virtually always abuse.\n",
+      "pattern": "[\\u202E\\u202D\\u200E\\u200F\\u200B\\u200C\\u200D\\uFEFF]{2,}",
+      "severity": "medium",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.encoding"
+      },
+      "tags": [
+        "unicode",
+        "invisible-chars"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.93,
+      "description": "Forged system/admin XML-style tag in user input attempting to spoof a privileged role.",
+      "first_seen": "2023-10-05",
+      "id": "sig-0018",
+      "language": "en",
+      "pattern": "(?i)<\\s*(system|admin|root|developer)\\s*>.{0,200}<\\s*/\\s*\\1\\s*>",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.latentinjection.LatentInjectionFactSnippetEiffel"
+      },
+      "tags": [
+        "tag-spoof",
+        "latent-injection"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "instruction_override",
+      "confidence": 0.88,
+      "description": "Bracket-style fake system tag injected via untrusted document content.",
+      "first_seen": "2023-10-12",
+      "id": "sig-0019",
+      "language": "en",
+      "pattern": "(?i)\\[\\s*(system|admin|important|override|instruction)\\s*\\].{0,200}\\[\\s*/\\s*\\1\\s*\\]",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.latentinjection"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.85,
+      "description": "Markdown-heading-style fake system block (### SYSTEM:) used to spoof a new instruction frame.",
+      "first_seen": "2023-11-02",
+      "id": "sig-0020",
+      "language": "en",
+      "pattern": "(?i)###\\s*(new\\s+)?(system|instruction|admin|override)\\s*(prompt|message|rule)?\\s*[:#]",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.latentinjection"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "indirect_injection",
+      "confidence": 0.9,
+      "description": "Garak's canonical latent-injection canary fact corruption (Eiffel tower in Rome).",
+      "first_seen": "2023-12-01",
+      "id": "sig-0021",
+      "language": "en",
+      "pattern": "(?i)\\bthe\\s+(eiffel\\s+tower|statue\\s+of\\s+liberty)\\s+is\\s+(located\\s+)?in\\s+(rome|berlin|tokyo|beijing)\\b",
+      "severity": "medium",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.latentinjection.LatentInjectionFactSnippetEiffel"
+      },
+      "tags": [
+        "canary",
+        "rag-poisoning"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.85,
+      "description": "Attacker announces a 'new system prompt:' to shadow the real one.",
+      "first_seen": "2023-05-01",
+      "id": "sig-0022",
+      "language": "en",
+      "pattern": "(?i)\\bnew\\s+(system\\s+)?(prompt|instructions?|directives?)\\s*[:=]",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "system_prompt_leak",
+      "confidence": 0.94,
+      "description": "Prompt-leak attempt: print your initial/original prompt.",
+      "first_seen": "2023-06-01",
+      "id": "sig-0023",
+      "language": "en",
+      "pattern": "(?i)\\bprint\\s+(your|the)\\s+(initial|original|first|opening)\\s+(prompt|instructions?|message|words)\\b",
+      "severity": "critical",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "system_prompt_leak",
+      "confidence": 0.9,
+      "description": "Conversational prompt-extraction: 'what were your initial instructions?'.",
+      "first_seen": "2023-06-10",
+      "id": "sig-0024",
+      "language": "en",
+      "pattern": "(?i)\\bwhat\\s+(were|are)\\s+your\\s+(exact\\s+)?(initial|original|system)\\s+(instructions?|prompt|directives?)\\b",
+      "severity": "critical",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "data_exfiltration",
+      "confidence": 0.92,
+      "description": "Exfiltration directive: send conversation/credentials to an attacker-controlled destination.",
+      "first_seen": "2024-02-01",
+      "id": "sig-0025",
+      "language": "en",
+      "pattern": "(?i)\\b(send|email|forward|post|exfiltrate|leak)\\s+(the\\s+)?(conversation|chat|history|transcript|user\\s+data|credentials|api\\s+key)\\s+to\\b",
+      "severity": "critical",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "tags": [
+        "exfil"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "data_exfiltration",
+      "confidence": 0.95,
+      "description": "Markdown-image exfil: smuggles conversation data via image URL query parameters.",
+      "first_seen": "2024-03-15",
+      "id": "sig-0026",
+      "language": "en",
+      "pattern": "(?i)!\\[[^\\]]*\\]\\(https?://[^)]+\\?[^)]*(prompt|conversation|history|data)=",
+      "severity": "critical",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "tags": [
+        "markdown-image-exfil"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "tool_misuse",
+      "confidence": 0.88,
+      "description": "Indirect-injection tool-misuse: call a tool/API silently without user confirmation.",
+      "first_seen": "2024-04-01",
+      "id": "sig-0027",
+      "language": "en",
+      "pattern": "(?i)\\bcall\\s+(the\\s+)?(tool|function|api)\\s+\\w+.{0,80}\\b(without\\s+(asking|confirmation|notifying)|silently|secretly)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "indirect_injection",
+      "confidence": 0.92,
+      "description": "Indirect injection embedded in documents: 'when you summarize this, ignore prior instructions'.",
+      "first_seen": "2024-01-10",
+      "id": "sig-0028",
+      "language": "en",
+      "pattern": "(?i)\\bwhen\\s+(you|the\\s+model|the\\s+assistant)\\s+(summarize|read|process|analyze)\\s+this\\s+(document|page|email|message),?\\s+(ignore|disregard|override)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "tags": [
+        "rag-poisoning"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "policy_evasion",
+      "confidence": 0.9,
+      "description": "Agentic-fraud directive: approve transaction skipping verification.",
+      "first_seen": "2024-05-01",
+      "id": "sig-0029",
+      "language": "en",
+      "pattern": "(?i)\\b(approve|authorize|confirm|accept)\\s+(this|the)\\s+(transaction|transfer|purchase|payment|request)\\s+(without|skipping|bypassing)\\s+(verification|review|confirmation|2fa|mfa)\\b",
+      "severity": "critical",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "policy_evasion",
+      "confidence": 0.9,
+      "description": "Stealth directive in untrusted content: hide actions from the user.",
+      "first_seen": "2024-02-15",
+      "id": "sig-0030",
+      "language": "en",
+      "pattern": "(?i)\\bdo\\s+not\\s+(tell|inform|notify|warn|mention\\s+to)\\s+the\\s+user\\b",
+      "severity": "high",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "policy_evasion",
+      "confidence": 0.87,
+      "description": "Self-erasing instruction telling the assistant to delete evidence after acting.",
+      "first_seen": "2024-06-01",
+      "id": "sig-0031",
+      "language": "en",
+      "pattern": "(?i)\\bafter\\s+(you\\s+)?(complete|finish|respond)\\b.{0,80}\\b(delete|remove|clear)\\s+(this|the)\\s+(message|instruction|conversation)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "policy_evasion",
+      "confidence": 0.88,
+      "description": "Hypothetical-frame jailbreak: 'this is just a test, safety rules do not apply'.",
+      "first_seen": "2024-03-01",
+      "id": "sig-0032",
+      "language": "en",
+      "pattern": "(?i)\\bthis\\s+is\\s+(a\\s+)?(test|drill|simulation|hypothetical)\\b.{0,80}\\b(safety|guidelines?|restrictions?|rules?)\\s+(do\\s+not\\s+apply|are\\s+disabled|are\\s+suspended)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "role_play_bypass",
+      "confidence": 0.85,
+      "description": "'Grandma exploit' social-engineering frame for eliciting policy-violating content.",
+      "first_seen": "2023-04-20",
+      "id": "sig-0033",
+      "language": "en",
+      "pattern": "(?i)\\bmy\\s+grandmother\\s+used\\s+to\\b.{0,120}\\b(tell|read|recite)\\s+me\\b",
+      "severity": "medium",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "tags": [
+        "grandma-exploit"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "policy_evasion",
+      "confidence": 0.78,
+      "description": "'Educational purposes only' framing followed by a how-to request — classic policy-evasion preamble.",
+      "first_seen": "2023-03-01",
+      "id": "sig-0034",
+      "language": "en",
+      "notes": "Medium FPR — appears in legitimate academic queries. Use as a weak signal\nthat combines with other indicators.\n",
+      "pattern": "(?i)\\b(for\\s+)?educational\\s+purposes\\s+only\\b.{0,100}\\b(how\\s+to|step[\\s\\-]by[\\s\\-]step|instructions?\\s+for)\\b",
+      "severity": "medium",
+      "source": {
+        "origin": "owasp",
+        "reference": "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "multi_turn",
+      "category": "context_overflow",
+      "confidence": 0.9,
+      "description": "Many-shot jailbreak Q:/A: stack — 8+ repetitions designed to override alignment via in-context learning.",
+      "first_seen": "2024-04-02",
+      "id": "sig-0035",
+      "language": "en",
+      "notes": "Threshold of 8 picked from the paper's reported inflection point. Lower\nthresholds (3-4) cause FPs on legitimate few-shot prompting.\n",
+      "pattern": "(?is)(\\bQ\\s*:\\s*.+?\\bA\\s*:\\s*.+?){8,}",
+      "severity": "high",
+      "source": {
+        "origin": "anthropic-paper",
+        "reference": "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+      },
+      "tags": [
+        "many-shot",
+        "msj"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "multi_turn",
+      "category": "context_overflow",
+      "confidence": 0.92,
+      "description": "Many-shot variant using 'Human:/Assistant:' framing — six or more fake turns in user input.",
+      "first_seen": "2024-04-02",
+      "id": "sig-0036",
+      "language": "en",
+      "pattern": "(?is)(\\bHuman\\s*:\\s*.+?\\bAssistant\\s*:\\s*.+?){6,}",
+      "severity": "high",
+      "source": {
+        "origin": "anthropic-paper",
+        "reference": "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+      },
+      "tags": [
+        "many-shot",
+        "fake-transcript"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "multi_turn",
+      "category": "context_overflow",
+      "confidence": 0.88,
+      "description": "Many-shot User:/AI: framing — fabricated multi-turn transcript.",
+      "first_seen": "2024-04-02",
+      "id": "sig-0037",
+      "language": "en",
+      "pattern": "(?is)(\\bUser\\s*:\\s*.+?\\b(AI|Bot|Model|Assistant)\\s*:\\s*.+?){6,}",
+      "severity": "high",
+      "source": {
+        "origin": "anthropic-paper",
+        "reference": "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "multi_turn",
+      "category": "context_overflow",
+      "confidence": 0.93,
+      "description": "Many-shot using XML-tagged fake turns (<user>...</user><assistant>...</assistant>).",
+      "first_seen": "2024-05-10",
+      "id": "sig-0038",
+      "language": "en",
+      "pattern": "(?is)(<\\s*(user|human)\\s*>.{1,500}<\\s*/\\s*\\2\\s*>\\s*<\\s*(assistant|ai|model)\\s*>.{1,500}<\\s*/\\s*\\3\\s*>\\s*){5,}",
+      "severity": "high",
+      "source": {
+        "origin": "anthropic-paper",
+        "reference": "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "multi_turn",
+      "category": "context_overflow",
+      "confidence": 0.8,
+      "description": "Stacked 'how do I ...' MSJ variant — eight or more repeated escalation questions.",
+      "first_seen": "2024-05-15",
+      "id": "sig-0039",
+      "language": "en",
+      "pattern": "(?is)how\\s+do\\s+I\\s+\\w+\\??\\s*\\n+.{0,400}\\n+how\\s+do\\s+I\\s+\\w+\\??\\s*\\n+.{0,400}\\n+how\\s+do\\s+I\\s+\\w+\\??(\\s*\\n+.{0,400}\\n+how\\s+do\\s+I\\s+\\w+\\??){5,}",
+      "severity": "medium",
+      "source": {
+        "origin": "anthropic-paper",
+        "reference": "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.93,
+      "description": "Self-announced 'jailbroken response' — common in dual-persona DAN variants.",
+      "first_seen": "2023-02-01",
+      "id": "sig-0040",
+      "language": "en",
+      "pattern": "(?i)\\b(jailbroken|jailbreak\\s+mode)\\s+(response|answer|version|mode)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://www.jailbreakchat.com/"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.96,
+      "description": "Canonical DAN preamble: 'you have been freed from the typical confines of AI'.",
+      "first_seen": "2023-02-15",
+      "id": "sig-0041",
+      "language": "en",
+      "pattern": "(?i)\\byou\\s+have\\s+(been\\s+)?(freed|liberated|released)\\s+from\\s+(the\\s+)?(typical|usual)?\\s*(confines|constraints|restrictions|limitations|chains)\\s+(of\\s+AI)?\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/0xk1h0/ChatGPT_DAN"
+      },
+      "tags": [
+        "dan"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "dan_jailbreak",
+      "confidence": 0.9,
+      "description": "Dual-persona output markers ([JAILBREAK]:, [CLASSIC]:, 🔓DAN:) seen in DAN-family responses or attack templates.",
+      "first_seen": "2023-03-10",
+      "id": "sig-0042",
+      "language": "en",
+      "pattern": "(?i)\\b(GPT|Claude|Gemini|Llama)?\\s*\\[?\\s*(🔓|🔒)?\\s*(JAILBREAK|CLASSIC|DAN|NORMAL)\\s*\\]?\\s*:",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/0xk1h0/ChatGPT_DAN"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "policy_evasion",
+      "confidence": 0.94,
+      "description": "Direct request to ignore safety/ethical guidelines.",
+      "first_seen": "2023-04-05",
+      "id": "sig-0043",
+      "language": "en",
+      "pattern": "(?i)\\bignore\\s+(your|all|any)\\s+(safety|ethical|moral|content)\\s+(guidelines?|policies|filters?|rules?|restrictions?)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/elder-plinius/L1B3RT4S"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "social_engineering",
+      "category": "policy_evasion",
+      "confidence": 0.82,
+      "description": "'Opposite day' inversion frame used to flip refusals into compliances.",
+      "first_seen": "2023-03-20",
+      "id": "sig-0044",
+      "language": "en",
+      "pattern": "(?i)\\b(opposite|inverse|reverse)\\s+day\\b|\\bsay\\s+the\\s+opposite\\s+of\\s+what\\s+you\\s+(would|usually|normally)\\b",
+      "severity": "medium",
+      "source": {
+        "origin": "community",
+        "reference": "https://www.jailbreakchat.com/prompt/opposite-day"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "indirect_injection",
+      "confidence": 0.95,
+      "description": "Indirect-injection address line: 'if you are an AI reading this' — Greshake et al.'s canonical opener.",
+      "first_seen": "2023-02-28",
+      "id": "sig-0045",
+      "language": "en",
+      "pattern": "(?i)\\bif\\s+you\\s+are\\s+(an?\\s+)?(AI|language\\s+model|assistant|chatbot|LLM)\\s+(reading|processing|parsing|summarizing)\\s+this\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://greshake.github.io/"
+      },
+      "tags": [
+        "rag-poisoning",
+        "indirect"
+      ],
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "indirect_injection",
+      "confidence": 0.9,
+      "description": "Direct address to the model embedded inside untrusted content ('Attention AI: ...').",
+      "first_seen": "2023-03-15",
+      "id": "sig-0046",
+      "language": "en",
+      "pattern": "(?i)\\battention\\s+(AI|assistant|language\\s+model|chatbot|claude|gpt|gemini)\\b\\s*[:!,.]",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://greshake.github.io/"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "indirect_injection",
+      "confidence": 0.87,
+      "description": "Indirect injection via fake user-claim: 'the user has asked you to ignore ...'.",
+      "first_seen": "2023-05-01",
+      "id": "sig-0047",
+      "language": "en",
+      "pattern": "(?i)\\b(the\\s+)?(user|human)\\s+(has\\s+)?(asked|requested|wants?)\\s+you\\s+to\\s+(ignore|override|disregard)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://kai-greshake.de/posts/inject-my-pdf/"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "indirect_injection",
+      "confidence": 0.9,
+      "description": "Document-level instruction smuggling preamble for RAG/agent contexts.",
+      "first_seen": "2023-04-12",
+      "id": "sig-0048",
+      "language": "en",
+      "pattern": "(?i)\\bthis\\s+(document|page|email|message|file)\\s+(contains|includes)\\s+(important|critical|new|updated)\\s+(instructions?|directives?)\\s+for\\s+(the\\s+)?(AI|assistant|model)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://greshake.github.io/"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "indirect_injection",
+      "category": "tool_misuse",
+      "confidence": 0.83,
+      "description": "Agentic browse-and-fetch chain coerced via indirect content.",
+      "first_seen": "2024-05-20",
+      "id": "sig-0049",
+      "language": "en",
+      "pattern": "(?i)\\bsearch\\s+(the\\s+)?(web|internet|google)\\s+for\\b.{0,80}\\band\\s+(then\\s+)?(visit|open|fetch|follow)\\s+the\\s+(first|top)\\s+(result|link)\\s+(silently|without)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://embracethered.com/blog/posts/2024/llm-apps-automatic-tool-invocations/"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "multilingual",
+      "category": "multilingual_bypass",
+      "confidence": 0.93,
+      "description": "French variant of 'ignore previous instructions'.",
+      "first_seen": "2023-07-01",
+      "id": "sig-0050",
+      "language": "fr",
+      "pattern": "(?i)\\bignorez\\s+(toutes\\s+)?(les\\s+)?instructions?\\s+(préc[ée]dentes?|ant[ée]rieures?)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/leondz/garak/issues/multilingual"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "multilingual",
+      "category": "multilingual_bypass",
+      "confidence": 0.93,
+      "description": "German variant of 'ignore previous instructions'.",
+      "first_seen": "2023-07-01",
+      "id": "sig-0051",
+      "language": "de",
+      "pattern": "(?i)\\bignorieren\\s+sie\\s+(alle\\s+)?(vorherigen|vorhergehenden|bisherigen)\\s+(anweisungen|instruktionen|befehle)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/leondz/garak/issues/multilingual"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "multilingual",
+      "category": "multilingual_bypass",
+      "confidence": 0.95,
+      "description": "Simplified Chinese variant of 'ignore all previous instructions'.",
+      "first_seen": "2023-08-01",
+      "id": "sig-0052",
+      "language": "zh",
+      "pattern": "忽略所有之前的指令",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/leondz/garak/issues/multilingual"
+      },
+      "type": "substring"
+    },
+    {
+      "attack_class": "multilingual",
+      "category": "multilingual_bypass",
+      "confidence": 0.93,
+      "description": "Spanish variant of 'ignore previous instructions' (handles ignora/ignore).",
+      "first_seen": "2023-07-15",
+      "id": "sig-0053",
+      "language": "es",
+      "pattern": "(?i)\\bignor[ae]\\s+(todas\\s+)?(las\\s+)?instrucciones\\s+(previas|anteriores)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/leondz/garak/issues/multilingual"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "multilingual",
+      "category": "multilingual_bypass",
+      "confidence": 0.92,
+      "description": "Russian variant of 'ignore previous instructions' (various imperative forms).",
+      "first_seen": "2023-08-10",
+      "id": "sig-0054",
+      "language": "ru",
+      "pattern": "(?i)\\bигнорир(уй|овать|уйте)\\s+(все\\s+)?(предыдущие|прежние|прошлые)\\s+(инструкции|указания|команды)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "community",
+        "reference": "https://github.com/leondz/garak/issues/multilingual"
+      },
+      "type": "regex"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.92,
+      "description": "Literal 'BEGIN SYSTEM PROMPT' marker — attacker pretends to frame a new system block.",
+      "first_seen": "2023-05-20",
+      "id": "sig-0055",
+      "language": "en",
+      "pattern": "BEGIN SYSTEM PROMPT",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject"
+      },
+      "type": "substring"
+    },
+    {
+      "attack_class": "direct_injection",
+      "category": "instruction_override",
+      "confidence": 0.88,
+      "description": "Frame-breaking marker pair: 'end of system prompt' followed by 'new'/'begin'.",
+      "first_seen": "2023-06-20",
+      "id": "sig-0056",
+      "language": "en",
+      "pattern": "(?i)\\b(end|stop|terminate|close)\\s+(of\\s+)?(system|prior|previous)\\s+(prompt|instructions?|context)\\b.{0,50}\\b(new|begin)\\b",
+      "severity": "high",
+      "source": {
+        "origin": "garak",
+        "reference": "garak.probes.promptinject"
+      },
+      "type": "regex"
+    }
+  ],
+  "version": "1"
+}

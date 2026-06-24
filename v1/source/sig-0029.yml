@@ -1,0 +1,13 @@
+id: sig-0029
+type: regex
+pattern: "(?i)\\b(approve|authorize|confirm|accept)\\s+(this|the)\\s+(transaction|transfer|purchase|payment|request)\\s+(without|skipping|bypassing)\\s+(verification|review|confirmation|2fa|mfa)\\b"
+category: policy_evasion
+severity: critical
+attack_class: indirect_injection
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-05-01
+description: "Agentic-fraud directive: approve transaction skipping verification."
+confidence: 0.9
+language: en

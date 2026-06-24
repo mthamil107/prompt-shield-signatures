@@ -1,0 +1,16 @@
+id: sig-0001
+type: regex
+pattern: "(?i)\\bignore\\s+(all\\s+)?(previous|prior|above|preceding|earlier)\\s+(instructions?|prompts?|rules?|directives?|commands?)\\b"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject.HijackHateHumans"
+first_seen: 2022-09-12
+description: "Classic 'ignore previous instructions' override; tolerates 'all' filler and prior/above/preceding synonyms."
+confidence: 0.95
+tags:
+  - classic
+  - well-known
+language: en

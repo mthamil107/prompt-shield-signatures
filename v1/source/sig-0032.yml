@@ -1,0 +1,13 @@
+id: sig-0032
+type: regex
+pattern: "(?i)\\bthis\\s+is\\s+(a\\s+)?(test|drill|simulation|hypothetical)\\b.{0,80}\\b(safety|guidelines?|restrictions?|rules?)\\s+(do\\s+not\\s+apply|are\\s+disabled|are\\s+suspended)\\b"
+category: policy_evasion
+severity: high
+attack_class: social_engineering
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-03-01
+description: "Hypothetical-frame jailbreak: 'this is just a test, safety rules do not apply'."
+confidence: 0.88
+language: en

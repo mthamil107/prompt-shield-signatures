@@ -1,0 +1,21 @@
+# This file demonstrates EVERY common validation failure. CI must reject it.
+# Each inline comment names the rule violated.
+
+id: SIG-1               # FAIL: id pattern is ^sig-[0-9]{4}$ — must be lowercase 'sig-' and exactly 4 digits
+type: fuzzy             # FAIL: type must be one of regex|substring|semantic_hash
+pattern: ""             # FAIL: pattern has minLength 1 — empty string not allowed
+category: jailbreaking  # FAIL: category is a closed enum; 'jailbreaking' is not a member (use 'dan_jailbreak')
+severity: SEVERE        # FAIL: severity must be one of critical|high|medium|low (lowercase)
+attack_class: phishing  # FAIL: attack_class enum does not include 'phishing'
+source:
+  origin: twitter       # FAIL: origin must be one of garak|owasp|community|adversarial-fatigue|anthropic-paper
+                        # FAIL: 'reference' is required inside source — missing entirely
+  trust: high           # FAIL: additionalProperties is false on source — 'trust' is not allowed
+first_seen: 03/14/2024  # FAIL: first_seen must be ISO YYYY-MM-DD, not US slash format
+description: "x"        # FAIL: description minLength is 8 characters
+confidence: 1.4         # FAIL: confidence must be in [0.0, 1.0]
+tags:
+  - "Has Spaces"        # FAIL: tag pattern requires ^[a-z0-9][a-z0-9_-]{1,31}$ — no spaces, no uppercase
+  - "a"                 # FAIL: tag min length is 2 chars
+language: english       # FAIL: language must be a 2-letter ISO 639-1 code, e.g. 'en'
+unknown_field: 42       # FAIL: top-level additionalProperties is false — unknown fields rejected

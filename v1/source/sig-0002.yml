@@ -1,0 +1,13 @@
+id: sig-0002
+type: regex
+pattern: "(?i)\\bdisregard\\s+(all\\s+|any\\s+)?(previous|prior|above|preceding)\\s+(instructions?|prompts?|rules?|directives?)\\b"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject.HijackHateHumansMini"
+first_seen: 2022-09-12
+description: "Synonym variant: 'disregard previous instructions' — same intent as classic ignore-prior."
+confidence: 0.93
+language: en

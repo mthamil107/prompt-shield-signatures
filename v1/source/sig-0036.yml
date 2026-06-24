@@ -1,0 +1,16 @@
+id: sig-0036
+type: regex
+pattern: "(?is)(\\bHuman\\s*:\\s*.+?\\bAssistant\\s*:\\s*.+?){6,}"
+category: context_overflow
+severity: high
+attack_class: multi_turn
+source:
+  origin: anthropic-paper
+  reference: "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+first_seen: 2024-04-02
+description: "Many-shot variant using 'Human:/Assistant:' framing — six or more fake turns in user input."
+confidence: 0.92
+tags:
+  - many-shot
+  - fake-transcript
+language: en

@@ -1,0 +1,13 @@
+id: sig-0050
+type: regex
+pattern: "(?i)\\bignorez\\s+(toutes\\s+)?(les\\s+)?instructions?\\s+(préc[ée]dentes?|ant[ée]rieures?)\\b"
+category: multilingual_bypass
+severity: high
+attack_class: multilingual
+source:
+  origin: community
+  reference: "https://github.com/leondz/garak/issues/multilingual"
+first_seen: 2023-07-01
+description: "French variant of 'ignore previous instructions'."
+confidence: 0.93
+language: fr

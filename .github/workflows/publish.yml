@@ -1,0 +1,59 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Daily at 12:00 UTC. Matched to the offline-signing cadence: a faster
+    # cron would publish unsigned JSON faster than the maintainer can sign
+    # it, leaving clients on stale-but-valid data anyway. See THREAT-MODEL.md
+    # ("Why daily, not hourly"). v0.7.0 migrates to Sigstore Cosign keyless
+    # signing in CI, which lifts this constraint.
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Rebuild and publish v1/signatures.json
+    runs-on: ubuntu-latest
+    # Skip the auto-rebuild commit itself to avoid loops.
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+
+      - name: Build v1/signatures.json
+        run: python scripts/build.py build
+
+      # NOTE: signing is deliberately NOT performed in CI. The minisign
+      # secret key stays on the maintainer's local machine. After this
+      # workflow publishes a new v1/signatures.json, the maintainer runs
+      # `python scripts/build.py sign` locally and pushes the resulting
+      # v1/signatures.json.minisig as a separate commit.
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain v1/signatures.json)" ]; then
+            git add v1/signatures.json
+            git commit -m "chore(auto): rebuild v1/signatures.json [skip ci]"
+            git push
+          else
+            echo "No changes to v1/signatures.json — nothing to commit."
+          fi

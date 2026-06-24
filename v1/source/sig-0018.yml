@@ -1,0 +1,16 @@
+id: sig-0018
+type: regex
+pattern: "(?i)<\\s*(system|admin|root|developer)\\s*>.{0,200}<\\s*/\\s*\\1\\s*>"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.latentinjection.LatentInjectionFactSnippetEiffel"
+first_seen: 2023-10-05
+description: "Forged system/admin XML-style tag in user input attempting to spoof a privileged role."
+confidence: 0.93
+tags:
+  - tag-spoof
+  - latent-injection
+language: en

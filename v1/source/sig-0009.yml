@@ -1,0 +1,13 @@
+id: sig-0009
+type: regex
+pattern: "(?i)\\bDUDE\\b.{0,60}\\b(can\\s+do\\s+anything|no\\s+restrictions?)\\b"
+category: dan_jailbreak
+severity: high
+attack_class: social_engineering
+source:
+  origin: garak
+  reference: "garak.probes.dan.DUDE"
+first_seen: 2023-04-01
+description: "DUDE jailbreak persona — unrestricted variant of DAN."
+confidence: 0.88
+language: en

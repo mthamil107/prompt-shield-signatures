@@ -1,0 +1,13 @@
+id: sig-0037
+type: regex
+pattern: "(?is)(\\bUser\\s*:\\s*.+?\\b(AI|Bot|Model|Assistant)\\s*:\\s*.+?){6,}"
+category: context_overflow
+severity: high
+attack_class: multi_turn
+source:
+  origin: anthropic-paper
+  reference: "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+first_seen: 2024-04-02
+description: "Many-shot User:/AI: framing — fabricated multi-turn transcript."
+confidence: 0.88
+language: en

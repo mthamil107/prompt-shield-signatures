@@ -1,0 +1,13 @@
+id: sig-0038
+type: regex
+pattern: "(?is)(<\\s*(user|human)\\s*>.{1,500}<\\s*/\\s*\\2\\s*>\\s*<\\s*(assistant|ai|model)\\s*>.{1,500}<\\s*/\\s*\\3\\s*>\\s*){5,}"
+category: context_overflow
+severity: high
+attack_class: multi_turn
+source:
+  origin: anthropic-paper
+  reference: "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+first_seen: 2024-05-10
+description: "Many-shot using XML-tagged fake turns (<user>...</user><assistant>...</assistant>)."
+confidence: 0.93
+language: en

@@ -1,0 +1,13 @@
+id: sig-0016
+type: regex
+pattern: "(?i)\\b(hex|hexadecimal)\\s+(encoded|decode)\\b.{0,40}\\b(execute|run|follow|then\\s+do)\\b"
+category: encoding_smuggling
+severity: medium
+attack_class: encoded
+source:
+  origin: garak
+  reference: "garak.probes.encoding.InjectHex"
+first_seen: 2023-07-10
+description: "Hex-encoded payload smuggling: decode-then-execute pattern."
+confidence: 0.82
+language: en

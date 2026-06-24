@@ -1,0 +1,16 @@
+id: sig-0045
+type: regex
+pattern: "(?i)\\bif\\s+you\\s+are\\s+(an?\\s+)?(AI|language\\s+model|assistant|chatbot|LLM)\\s+(reading|processing|parsing|summarizing)\\s+this\\b"
+category: indirect_injection
+severity: high
+attack_class: indirect_injection
+source:
+  origin: community
+  reference: "https://greshake.github.io/"
+first_seen: 2023-02-28
+description: "Indirect-injection address line: 'if you are an AI reading this' — Greshake et al.'s canonical opener."
+confidence: 0.95
+tags:
+  - rag-poisoning
+  - indirect
+language: en

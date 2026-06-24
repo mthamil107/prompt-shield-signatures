@@ -1,0 +1,13 @@
+id: sig-0019
+type: regex
+pattern: "(?i)\\[\\s*(system|admin|important|override|instruction)\\s*\\].{0,200}\\[\\s*/\\s*\\1\\s*\\]"
+category: instruction_override
+severity: high
+attack_class: indirect_injection
+source:
+  origin: garak
+  reference: "garak.probes.latentinjection"
+first_seen: 2023-10-12
+description: "Bracket-style fake system tag injected via untrusted document content."
+confidence: 0.88
+language: en

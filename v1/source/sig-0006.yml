@@ -1,0 +1,16 @@
+id: sig-0006
+type: regex
+pattern: "(?i)\\byou\\s+are\\s+(now\\s+)?DAN\\b|\\bdo\\s+anything\\s+now\\b"
+category: dan_jailbreak
+severity: high
+attack_class: social_engineering
+source:
+  origin: garak
+  reference: "garak.probes.dan.Dan_11_0"
+first_seen: 2022-12-01
+description: "Canonical DAN ('Do Anything Now') role-assumption opener."
+confidence: 0.97
+tags:
+  - dan
+  - role-hijack
+language: en

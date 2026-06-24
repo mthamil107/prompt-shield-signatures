@@ -1,0 +1,13 @@
+id: sig-0027
+type: regex
+pattern: "(?i)\\bcall\\s+(the\\s+)?(tool|function|api)\\s+\\w+.{0,80}\\b(without\\s+(asking|confirmation|notifying)|silently|secretly)\\b"
+category: tool_misuse
+severity: high
+attack_class: indirect_injection
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-04-01
+description: "Indirect-injection tool-misuse: call a tool/API silently without user confirmation."
+confidence: 0.88
+language: en

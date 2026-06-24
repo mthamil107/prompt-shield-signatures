@@ -1,0 +1,13 @@
+id: sig-0008
+type: regex
+pattern: "(?i)\\bSTAN\\b.{0,40}\\b(strive\\s+to\\s+avoid\\s+norms?|jailbreak)\\b"
+category: dan_jailbreak
+severity: high
+attack_class: social_engineering
+source:
+  origin: garak
+  reference: "garak.probes.dan.STAN"
+first_seen: 2023-03-05
+description: "STAN ('Strive To Avoid Norms') jailbreak persona."
+confidence: 0.9
+language: en

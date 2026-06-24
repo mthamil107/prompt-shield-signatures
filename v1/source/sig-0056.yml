@@ -1,0 +1,13 @@
+id: sig-0056
+type: regex
+pattern: "(?i)\\b(end|stop|terminate|close)\\s+(of\\s+)?(system|prior|previous)\\s+(prompt|instructions?|context)\\b.{0,50}\\b(new|begin)\\b"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject"
+first_seen: 2023-06-20
+description: "Frame-breaking marker pair: 'end of system prompt' followed by 'new'/'begin'."
+confidence: 0.88
+language: en

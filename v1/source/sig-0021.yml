@@ -1,0 +1,16 @@
+id: sig-0021
+type: regex
+pattern: "(?i)\\bthe\\s+(eiffel\\s+tower|statue\\s+of\\s+liberty)\\s+is\\s+(located\\s+)?in\\s+(rome|berlin|tokyo|beijing)\\b"
+category: indirect_injection
+severity: medium
+attack_class: indirect_injection
+source:
+  origin: garak
+  reference: "garak.probes.latentinjection.LatentInjectionFactSnippetEiffel"
+first_seen: 2023-12-01
+description: "Garak's canonical latent-injection canary fact corruption (Eiffel tower in Rome)."
+confidence: 0.9
+tags:
+  - canary
+  - rag-poisoning
+language: en

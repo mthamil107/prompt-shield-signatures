@@ -1,0 +1,23 @@
+# Fully-populated, valid signature. Lives at v1/source/sig-0001.yml.
+id: sig-0001
+type: regex
+pattern: "(?i)\\bignore\\s+(all\\s+)?(previous|prior|above)\\s+(instructions|prompts|rules)\\b"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject.HijackHateHumans"
+first_seen: 2024-03-14
+description: "Classic 'ignore previous instructions' override; case-insensitive, tolerates 'all' filler and prior/above synonyms."
+confidence: 0.95
+tags:
+  - classic
+  - high-fpr-on-summarization-tasks
+  - well-known
+last_updated: 2026-06-20
+notes: |
+  False positives expected on meta-discussions about prompt engineering and on
+  summarization tasks where users literally quote attacker payloads. Recommend
+  pairing with output-side detector at medium severity for those flows.
+language: en

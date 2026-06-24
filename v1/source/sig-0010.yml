@@ -1,0 +1,13 @@
+id: sig-0010
+type: regex
+pattern: "(?i)\\bAIM\\b.{0,60}\\b(always\\s+intelligent\\s+and\\s+machiavellian|niccol[oò])\\b"
+category: dan_jailbreak
+severity: high
+attack_class: social_engineering
+source:
+  origin: garak
+  reference: "garak.probes.dan.AntiDAN"
+first_seen: 2023-04-15
+description: "AIM ('Always Intelligent and Machiavellian') jailbreak persona."
+confidence: 0.9
+language: en

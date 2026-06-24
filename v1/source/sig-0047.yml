@@ -1,0 +1,13 @@
+id: sig-0047
+type: regex
+pattern: "(?i)\\b(the\\s+)?(user|human)\\s+(has\\s+)?(asked|requested|wants?)\\s+you\\s+to\\s+(ignore|override|disregard)\\b"
+category: indirect_injection
+severity: high
+attack_class: indirect_injection
+source:
+  origin: community
+  reference: "https://kai-greshake.de/posts/inject-my-pdf/"
+first_seen: 2023-05-01
+description: "Indirect injection via fake user-claim: 'the user has asked you to ignore ...'."
+confidence: 0.87
+language: en

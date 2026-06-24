@@ -1,0 +1,13 @@
+id: sig-0043
+type: regex
+pattern: "(?i)\\bignore\\s+(your|all|any)\\s+(safety|ethical|moral|content)\\s+(guidelines?|policies|filters?|rules?|restrictions?)\\b"
+category: policy_evasion
+severity: high
+attack_class: direct_injection
+source:
+  origin: community
+  reference: "https://github.com/elder-plinius/L1B3RT4S"
+first_seen: 2023-04-05
+description: "Direct request to ignore safety/ethical guidelines."
+confidence: 0.94
+language: en

@@ -1,0 +1,19 @@
+id: sig-0035
+type: regex
+pattern: "(?is)(\\bQ\\s*:\\s*.+?\\bA\\s*:\\s*.+?){8,}"
+category: context_overflow
+severity: high
+attack_class: multi_turn
+source:
+  origin: anthropic-paper
+  reference: "Many-shot Jailbreaking (Anil et al., Anthropic, 2024)"
+first_seen: 2024-04-02
+description: "Many-shot jailbreak Q:/A: stack — 8+ repetitions designed to override alignment via in-context learning."
+confidence: 0.9
+tags:
+  - many-shot
+  - msj
+notes: |
+  Threshold of 8 picked from the paper's reported inflection point. Lower
+  thresholds (3-4) cause FPs on legitimate few-shot prompting.
+language: en

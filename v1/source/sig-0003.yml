@@ -1,0 +1,13 @@
+id: sig-0003
+type: regex
+pattern: "(?i)\\b(forget|delete|erase)\\s+(everything|all)\\s+(you\\s+)?(know|knew|were\\s+told|above|before)\\b"
+category: instruction_override
+severity: high
+attack_class: direct_injection
+source:
+  origin: garak
+  reference: "garak.probes.promptinject"
+first_seen: 2023-01-15
+description: "Memory-wipe variant: instructs the model to forget everything previously told."
+confidence: 0.9
+language: en

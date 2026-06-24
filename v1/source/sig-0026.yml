@@ -1,0 +1,15 @@
+id: sig-0026
+type: regex
+pattern: "(?i)!\\[[^\\]]*\\]\\(https?://[^)]+\\?[^)]*(prompt|conversation|history|data)="
+category: data_exfiltration
+severity: critical
+attack_class: indirect_injection
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-03-15
+description: "Markdown-image exfil: smuggles conversation data via image URL query parameters."
+confidence: 0.95
+tags:
+  - markdown-image-exfil
+language: en

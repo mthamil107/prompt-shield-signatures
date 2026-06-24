@@ -1,0 +1,15 @@
+id: sig-0028
+type: regex
+pattern: "(?i)\\bwhen\\s+(you|the\\s+model|the\\s+assistant)\\s+(summarize|read|process|analyze)\\s+this\\s+(document|page|email|message),?\\s+(ignore|disregard|override)\\b"
+category: indirect_injection
+severity: high
+attack_class: indirect_injection
+source:
+  origin: owasp
+  reference: "OWASP LLM Top 10 — LLM01: Prompt Injection (2025)"
+first_seen: 2024-01-10
+description: "Indirect injection embedded in documents: 'when you summarize this, ignore prior instructions'."
+confidence: 0.92
+tags:
+  - rag-poisoning
+language: en

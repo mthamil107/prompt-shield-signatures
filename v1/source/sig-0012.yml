@@ -1,0 +1,19 @@
+id: sig-0012
+type: regex
+pattern: "(?i)describe\\.\\\\\\s*\\+\\s*similarlyNow\\s+write\\s+oppositeley"
+category: instruction_override
+severity: critical
+attack_class: adversarial_suffix
+source:
+  origin: garak
+  reference: "garak.probes.suffix.GCGCached"
+first_seen: 2023-07-27
+description: "Canonical GCG adversarial suffix fragment from Zou et al. 'Universal and Transferable Adversarial Attacks'."
+confidence: 0.98
+tags:
+  - gcg
+  - adversarial-suffix
+notes: |
+  Verbatim fragment of the published GCG suffix. Extremely low FPR — no benign
+  English text contains this character sequence.
+language: en
