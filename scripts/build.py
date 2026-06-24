@@ -376,9 +376,9 @@ def cmd_verify(paths: Paths) -> int:
 def _default_root() -> Path:
     """Repo root = the script's parent directory's parent.
 
-    Layout assumed: <root>/pipeline/scripts/build.py
+    Layout assumed: <root>/scripts/build.py
     """
-    return Path(__file__).resolve().parent.parent.parent
+    return Path(__file__).resolve().parent.parent
 
 
 def _build_parser() -> argparse.ArgumentParser:
