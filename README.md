@@ -4,8 +4,8 @@
 
 ![License](https://img.shields.io/badge/code-Apache--2.0-blue)
 ![Data License](https://img.shields.io/badge/data-CC0-success)
-![Signatures](https://img.shields.io/badge/signatures-TBD-informational)
-![Validate](https://img.shields.io/badge/validate-pending-lightgrey)
+[![Signatures](https://img.shields.io/badge/signatures-56-blue)](v1/signatures.json)
+[![Verified](https://img.shields.io/badge/ed25519--signed-yes-success)](v1/signatures.json.minisig)
 
 > ⚠️ **v0.6.0-alpha — schema may evolve; clients should opt-in only.** No SLA or key-rotation cadence guarantee yet.
 
