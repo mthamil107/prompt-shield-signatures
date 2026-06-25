@@ -1,16 +1,14 @@
 name: publish
 
 on:
-  push:
-    branches:
-      - main
-  schedule:
-    # Daily at 12:00 UTC. Matched to the offline-signing cadence: a faster
-    # cron would publish unsigned JSON faster than the maintainer can sign
-    # it, leaving clients on stale-but-valid data anyway. See THREAT-MODEL.md
-    # ("Why daily, not hourly"). v0.7.0 migrates to Sigstore Cosign keyless
-    # signing in CI, which lifts this constraint.
-    - cron: '0 12 * * *'
+  # Manual-only for v0.6.0-alpha. The auto-daily cron was disabled after we
+  # discovered it created signature-lag loops: every CI rebuild bumps
+  # generated_at (now sourced from git commit time, but bot-pushed commits
+  # still produce a new commit time → new generated_at → maintainer's
+  # signature stale until they re-sign). For an alpha with offline signing
+  # and zero contributor PRs in flight, manual rebuild via workflow_dispatch
+  # is the honest cadence. v0.7.0 (Sigstore Cosign keyless signing) re-enables
+  # the cron because the key lives in OIDC, not the maintainer's laptop.
   workflow_dispatch:
 
 permissions:

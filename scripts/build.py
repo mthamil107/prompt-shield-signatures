@@ -217,15 +217,46 @@ def _validate_all(paths: Paths) -> list[dict[str, Any]]:
 
 
 def _deterministic_generated_at(paths: Paths) -> str:
-    """Derive a deterministic RFC3339 UTC timestamp from the LATEST mtime under v1/source/.
+    """Derive a deterministic RFC3339 UTC timestamp.
 
-    Rationale: using datetime.now() would make every CI run produce a new
-    signatures.json even when no source file changed, causing endless commit
-    churn. The latest mtime is stable across rebuilds of the same source tree
-    (in CI, mtimes are set from the git checkout) and updates exactly when a
-    source file changes.
+    Strategy (in order of preference):
+
+    1. Latest `git log` commit time of any file under ``v1/source/``. This is
+       genuinely deterministic across machines and CI checkouts — the commit
+       timestamp is part of the immutable repo history.
+    2. Fallback: latest mtime under ``v1/source/`` (only used when ``.git``
+       is absent, e.g., source tarballs).
+
+    Why not mtime? GitHub Actions ``actions/checkout`` resets every file's
+    mtime to the checkout time, so an mtime-based timestamp bumps on every
+    CI run even with zero content changes. That breaks every offline-signed
+    artifact — the maintainer signs bytes A, CI checks out the repo, rewrites
+    bytes A' (same content, different mtime), and now bytes A' don't match
+    the signature. Git commit time is the actual source of truth.
     """
     files = _iter_source_files(paths)
+
+    try:
+        import subprocess  # local import — only needed on this path
+
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%ct", "--", "v1/source/"],
+            cwd=paths.root,
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=False,
+        )
+        commit_ts = result.stdout.strip()
+        if result.returncode == 0 and commit_ts.isdigit():
+            dt = datetime.fromtimestamp(int(commit_ts), tz=timezone.utc).replace(
+                microsecond=0
+            )
+            return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    except (OSError, ValueError, subprocess.SubprocessError):
+        pass
+
+    # Fallback: filesystem mtime (works in source tarballs without .git).
     latest = max(f.stat().st_mtime for f in files)
     dt = datetime.fromtimestamp(latest, tz=timezone.utc).replace(microsecond=0)
     return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
